@@ -34,7 +34,7 @@ func (a *App) Run(addr string) {
 func (a *App) initializeRoutes() {
 	a.Router.HandleFunc("/", middlewares.CheckDB(handlers.HomeHandler)).Methods("GET")
 	a.Router.HandleFunc("/register", middlewares.CheckDB(handlers.RegisterHandler)).Methods("POST")
-	// a.Router.HandleFunc("/characters", controller.GetCharacters).Methods("GET")
-	// a.Router.HandleFunc("/save_characters", controller.SaveCharacters).Methods("GET")
+	a.Router.HandleFunc("/login", middlewares.CheckDB(handlers.LoginHandler)).Methods("POST")
+	a.Router.HandleFunc("/profile", middlewares.CheckDB(middlewares.ValidateJWT(handlers.ProfileHandler))).Methods("GET")
 	// a.Router.HandleFunc("/read_characters/{type}/{items}/{itemsPerWorker}", controller.ReadCharacters).Methods("GET")
 }
