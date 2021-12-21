@@ -1,4 +1,15 @@
 package config
 
-const MongoDBHost = "mongodb+srv://twitter-clone-user:p4ssw0rd@cluster0.zfe0g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const Port = ":8080"
+import (
+	"log"
+
+	"github.com/joho/godotenv"
+)
+
+func GetVariables(variable string) string {
+	var myEnv, err = godotenv.Read()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	return myEnv[variable]
+}

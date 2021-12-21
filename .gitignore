@@ -18,4 +18,3 @@
 ### Go Patch ###
 /vendor/
 /Godeps/
-/config/
