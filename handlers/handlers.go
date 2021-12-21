@@ -6,6 +6,7 @@ import (
 
 	"github.com/lscantillo/twitter-clone-api/db"
 	"github.com/lscantillo/twitter-clone-api/models"
+	"github.com/lscantillo/twitter-clone-api/utils"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -29,17 +30,19 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	_, finded, _ := db.UserExists(t.Email)
 	if finded {
-		http.Error(w, "User already exists"+err.Error(), http.StatusBadRequest)
+		//http.Error(w, "User already exists", http.StatusBadRequest)
+		utils.RespondWithJSON(w, http.StatusBadRequest, "User already exists", nil)
 		return
 	}
-	_, status, err := db.CreateUser(t)
+	_id, status, err := db.CreateUser(t)
 	if err != nil {
 		http.Error(w, "Error while saving data"+err.Error(), http.StatusBadRequest)
 		return
 	}
-	if status == false {
+	if !status {
 		http.Error(w, "Error while saving data", http.StatusBadRequest)
 		return
 	}
-	w.WriteHeader(http.StatusCreated)
+	utils.RespondWithJSON(w, http.StatusCreated, "User created successfully", _id)
+
 }

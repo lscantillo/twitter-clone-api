@@ -15,5 +15,5 @@ func main() {
 	}
 	a := routers.App{}
 	a.Initialize()
-	a.Run(config.Port)
+	a.Run(config.GetVariables("PORT"))
 }

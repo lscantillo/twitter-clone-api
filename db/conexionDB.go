@@ -10,7 +10,7 @@ import (
 )
 
 var MongoCN = ConnectMongoDB()
-var clientOptions = options.Client().ApplyURI(config.MongoDBHost)
+var clientOptions = options.Client().ApplyURI(config.GetVariables("MONGO_URL"))
 
 func ConnectMongoDB() *mongo.Client {
 	client, err := mongo.Connect(context.TODO(), clientOptions)
