@@ -18,4 +18,5 @@
 ### Go Patch ###
 /vendor/
 /Godeps/
-.env/
+# Ignore local env file 
+.env
