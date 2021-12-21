@@ -9,7 +9,7 @@ import (
 func GetVariables(variable string) string {
 	var myEnv, err = godotenv.Read()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Error loading .env file" + err.Error())
 	}
 	return myEnv[variable]
 }
