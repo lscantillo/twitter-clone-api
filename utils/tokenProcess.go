@@ -21,7 +21,7 @@ func TokenProcess(token string) (*models.Claim, bool, string, error) {
 	claims := &models.Claim{}
 	splitToken := strings.Split(token, "Bearer ")
 	if len(splitToken) != 2 {
-		return claims, false, "", errors.New("Invalid token")
+		return claims, false, "", errors.New("invalid token")
 	}
 	token = strings.TrimSpace(splitToken[1])
 	tokenClaims, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
@@ -36,7 +36,7 @@ func TokenProcess(token string) (*models.Claim, bool, string, error) {
 		return claims, finded, UserID, nil
 	}
 	if !tokenClaims.Valid {
-		return claims, false, "", errors.New("Invalid token")
+		return claims, false, "", errors.New("invalid token")
 	}
 	return claims, false, "", err
 }
